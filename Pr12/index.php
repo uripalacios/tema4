@@ -7,6 +7,11 @@
     <title>Practica 12</title>
 </head>
 <body>
+    <h1>CRUD</h1>
+    <?php
+        require_once("./codigo/segura/conexionBD.php");
+        conexion();
+    ?>
     
     
 </body>

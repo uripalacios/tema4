@@ -9,8 +9,11 @@
 <body>
     <h1>CRUD</h1>
     <?php
-        require_once("./codigo/segura/conexionBD.php");
-        conexion();
+        require_once("./codigo/funcionesBD.php");
+        conexionSinBBDD();
+        if(conexionConBBDD()){
+            
+        }        
     ?>
     
     

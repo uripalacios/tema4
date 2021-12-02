@@ -30,7 +30,7 @@
         echo "<button name='creacionBD' id='creacionBD'><a href='./codigo/crearBD.php'>Crear Script</a></button>";
     }
 
-    function create(){
+    function crearBBBDD(){
         if(!($conexion  = @mysqli_connect(IP,USER,PASS))){
             echo "Error: ".mysqli_connect_error();
             //exit nos sirve para que no se siga ejecutando, sale del programa
@@ -38,6 +38,16 @@
         }else{
             $comandosSQl = file_get_contents("./segura/coches.sql");
             mysqli_multi_query($conexion,$comandosSQl);
+            mysqli_close($conexion);
+        }
+    }
+
+    function create(){
+        if(!($conexion  = @mysqli_connect(IP,USER,PASS))){
+            echo "Error: ".mysqli_connect_error();
+            //exit nos sirve para que no se siga ejecutando, sale del programa
+            exit();
+        }else{
             mysqli_close($conexion);
         }
     }

@@ -11,10 +11,15 @@
     <?php
         require_once("./codigo/funcionesBD.php");
         conexionSinBBDD();
-        if(conexionConBBDD()){
-            
-        }        
+             
     ?>
+    <form action="" method="post">
+        <?php conexionConBBDD();?>
+
+        <button id="leer">Leer</button>
+        
+        <button id="insertar">Insertar</button>
+    </form>
     
     
 </body>

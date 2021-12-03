@@ -1,5 +1,5 @@
 <?php
-    require_once("./codigo/segura/conexionBD.php");
+    //require_once("./codigo/segura/conexionBD.php");
     function conexionSinBBDD(){
         if(!($conexion  = @mysqli_connect(IP,USER,PASS))){
             $error = mysqli_connect_errno();
@@ -27,7 +27,7 @@
     }
 
     function crearBoton(){
-        echo "<button name='creacionBD' id='creacionBD'><a href='./codigo/crearBD.php'>Crear Script</a></button>";
+        echo "<input type='submit' value='Crear Script' name='crear'>";
     }
 
     function crearBBBDD(){
@@ -36,7 +36,7 @@
             //exit nos sirve para que no se siga ejecutando, sale del programa
             exit();
         }else{
-            $comandosSQl = file_get_contents("./segura/coches.sql");
+            $comandosSQl = file_get_contents("./codigo/segura/coches.sql");
             mysqli_multi_query($conexion,$comandosSQl);
             mysqli_close($conexion);
         }
@@ -52,8 +52,26 @@
         }
     }
 
-    function read(){
-
+    function read($texto){
+        if(!($conexion  = @mysqli_connect(IP,USER,PASS,BBDD))){
+            echo "Error: ".mysqli_connect_error();
+            //exit nos sirve para que no se siga ejecutando, sale del programa
+            exit();
+        }else{
+            //sentencia sql
+            $preparada = mysqli_stmt_init($conexion);
+            $sql = "select * from coche where marca like %?%";
+            $buscar =$texto;
+            mysqli_stmt_prepare($preparada,$sql);
+            mysqli_stmt_bind_param($preparada,'s',$buscar);
+            mysqli_stmt_execute($preparada);
+            $resultado = mysqli_stmt_get_result($preparada);
+            $fila = mysqli_fetch_array($resultado);
+            while($fila){
+                print_r($fila);
+            }
+            mysqli_close($conexion);
+        }
     }
 
     function update(){
